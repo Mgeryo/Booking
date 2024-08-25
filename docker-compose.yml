@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: book_db
+    environment:
+»	    POSTGRES_USER: 
+»	    POSTGRES_PASSWORD: 
+»	    POSTGRES_DB: 
+    ports:
+      - 5432:5432
+
+  booking:
+    image: image
+    build:
+      context: .
+    container_name: book_app
+    env_file:
+      - .env-non-dev
+    depends_on:
+      - db
+    ports:
+      - 7777:8000
